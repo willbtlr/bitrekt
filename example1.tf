@@ -122,3 +122,7 @@ resource "aws_instance" "ec2_instance" {
   }
 }
 
+resource "aws_iam_user_policy_attachment" "user_admin_policy" {
+  user       = "will"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
