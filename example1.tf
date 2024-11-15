@@ -1,6 +1,6 @@
 # Configure the AWS provider
 provider "aws" {
-  region = "us-east-1"
+  region = "us-east-2"
 }
 
 # Create an S3 bucket with secure defaults
