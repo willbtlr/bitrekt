@@ -54,6 +54,30 @@ resource "aws_s3_bucket" "secure_bucket" {
 POLICY
 }
 
+# Create an IAM role with AdministratorAccess policy
+resource "aws_iam_role" "cross_account_admin_role" {
+  name = "CrossAccountAdminRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement: [
+      {
+        Effect = "Allow",
+        Principal = {
+          AWS = "arn:aws:iam::347234123487:root"
+        },
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+# Attach the AdministratorAccess policy to the role
+resource "aws_iam_role_policy_attachment" "admin_policy_attachment" {
+  role       = aws_iam_role.cross_account_admin_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
 # Create an IAM role for EC2
 resource "aws_iam_role" "ec2_role" {
   name = "ec2_s3_read_role"
