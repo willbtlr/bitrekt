@@ -9,6 +9,8 @@ app = FastAPI(title="Sample API", description="A simple API with FastAPI")
 class Task(BaseModel):
     id: Optional[int] = None
     title: str
+    bar: str
+    foo: str
     description: str
     completed: bool = False
     created_at: Optional[datetime] = None
